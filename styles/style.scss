@@ -1,8 +1,19 @@
+/*
+@import "./styles/bulma/sass/utilities/initial-variables";
+
+// Update blue
+$blue: #72d0eb;
+
+// Use the new pink as the primary color
+// $primary: $pink
+$primary: #fca;
+// Use the existing orange as the danger color
+$danger: $orange;
+*/
 @import "./styles/bulma/bulma";
 
 $a: 20px;
-$bg: #da8;
-$primary: #fca;
+$bg: #eee;
 
 html {
 	background-color: $bg;
@@ -13,11 +24,16 @@ html {
 }
 
 .main {
-	background: $primary;
+	background: white;
 	position: absolute; 
 	top: 0; right: 0; 
 	bottom: 0; left: 0;
 	margin: auto;
 	height: 70%;
 	width: 70%;  
+}
+
+.li {
+	display: list-item !important;
+
 }
