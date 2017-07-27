@@ -1,5 +1,5 @@
 {
-  "name": "Recipe Box",
+  "name": "recipebox",
   "version": "1.0.0",
   "description": "fcc project: build a recipe box",
   "main": "index.js",
