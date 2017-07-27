@@ -1,28 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { RecipeForm } from "./components/RecipeForm";
 import "./styles/style.scss";
 
 class MainContainer extends React.Component {
 	render() {
 		return (
 				<div className="main">
-					<button className="button is-primary btn">Button</button>
-					<div className="columns">
-						<div className="column is-one-third">
-							<button className="button is-primary is-fullwidth">1
-							</button>
+					<div className="tile">
+						<div className="tile is-parent is-vertical is-2">
+								<div className="tile box is-primary is-child">foo</div>
+								<div className="tile notification is-primary is-child">bar</div>
 						</div>
-						<div className="column">
-							<button className="button is-primary is-fullwidth">2
-							</button>
-						</div>
-						<div className="column">
-							<button className="button is-primary is-fullwidth">3
-							</button>
-						</div>
-						<div className="column">
-							<button className="button is-primary is-fullwidth">4
-							</button>
+						<div className="tile is-parent">
+							<div className="tile is-child">
+								<RecipeForm/>
+							</div>
 						</div>
 					</div>
 				</div>
