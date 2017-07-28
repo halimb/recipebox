@@ -5,7 +5,8 @@ export class IngredientsBox extends React.Component {
 		super(props);
 		this.state = {
 						live: "",
-						ingredients: []
+						ingredients: [],
+						maxIngredients: "blabla"
 					};
 		this.addIngredient = this.addIngredient.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -20,13 +21,19 @@ export class IngredientsBox extends React.Component {
 		let newIngr = this.state.live;
 		if(newIngr != "") {
 			let ingredients = this.state.ingredients;
-			ingredients.push(<li key={ingredients.length} >
+			ingredients.push(<span className="tag is-light margin" 
+									key={ingredients.length}>
 									{newIngr}
-							 </li>);
+							 </span>);
 			this.setState({
 						live: "",
 						ingredients: ingredients
 					});
+
+			// Test for max number of ingredients
+			if(ingredients.length > 9) {
+
+			}
 		}
 	}
 
@@ -34,22 +41,25 @@ export class IngredientsBox extends React.Component {
 		return (
 				<form onSubmit={this.addIngredient} className="field box">
 					<h1>Ingredients</h1>
+					<br/>
 					{this.state.ingredients}
 					<hr/>
-					<div className="columns">
-						<div className="control column is-10">
+					<div className="field has-addons">
+						<p className="control">
 							<input  onChange={this.handleChange} 
 									value={this.state.live}
 									placeholder="Add an ingredient" 
-									className="input"
-									/>
-						</div>
-						<div className="column">
+									className="input"/>
+						</p>
+						<p className="control">
 							<button onClick={this.addIngredient} className="button is-primary">
 								+
 							</button>
-						</div>
+						</p>
 					</div>
+					<p className="help is-danger">
+						{this.state.maxIngredients}
+					</p>
 				</form>
 		)
 	}

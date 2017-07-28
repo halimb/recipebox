@@ -9,7 +9,7 @@ export class RecipeForm extends React.Component {
 
 	render() {
 		return (
-				<div className="box">
+				<div className="box fit">
 					<h1>Add a recipe</h1>
 					<br/>
 					<div className="field">
