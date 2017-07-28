@@ -1,4 +1,5 @@
 import React from "react"
+import Tag from "./Tag"
 
 export class RecipeForm extends React.Component {
 	constructor(props) {
@@ -17,12 +18,13 @@ export class RecipeForm extends React.Component {
 						disabled: false
 					}
 
-		this.submit = this.submit.bind(this)
-		this.onNameChange = this.onNameChange.bind(this)
-		this.submitRecipe = this.submitRecipe.bind(this)
-		this.addIngredient = this.addIngredient.bind(this)
-		this.handleIngr = this.handleIngr.bind(this)
 		this.reset = this.reset.bind(this)
+		this.submit = this.submit.bind(this)
+		this.closeTag = this.closeTag.bind(this)
+		this.handleIngr = this.handleIngr.bind(this)
+		this.onNameChange = this.onNameChange.bind(this)
+		this.addIngredient = this.addIngredient.bind(this)
+		this.submitRecipe = this.submitRecipe.bind(this)
 	}
 
 	reset() {
@@ -49,6 +51,10 @@ export class RecipeForm extends React.Component {
 		this.setState({ingr: event.target.value})
 	}
 
+	closeTag(key) {
+		console.log("tag " + key + "closed!")
+	}
+
 	addIngredient(e) {
 		if(e) { e.preventDefault() }
 		let newIngr = this.state.ingr
@@ -64,14 +70,13 @@ export class RecipeForm extends React.Component {
 							})
 			}
 			else {
-				newIngr = (<span className="tag is-light margin" 
-								key={ingredients.length}>
-								{newIngr}
-							</span>)
-				ingredients.push(<span className="tag is-light margin" 
-										key={ingredients.length}>
-										{newIngr}
-								 </span>)
+				let len = ingredients.length;
+				ingredients.push(
+					<Tag content={ newIngr } 
+						key={ len }
+						onClose={ () => { this.closeTag(len) } }
+					/>
+				);
 				this.setState({
 							ingr: "",
 							ingredients: ingredients,
