@@ -6,10 +6,23 @@ export class IngredientsBox extends React.Component {
 		this.state = {
 						live: "",
 						ingredients: [],
-						maxIngredients: "blabla"
+						maxIngMsg: "",
+						maxIngClass: "",
+						disabled: false
 					};
 		this.addIngredient = this.addIngredient.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.reset = this.reset.bind(this);
+	}
+
+	reset() {
+		this.setState( {
+							live: "",
+							ingredients: [],
+							maxIngMsg: "",
+							maxIngClass: "",
+							disabled: false
+						} )
 	}
 
 	handleChange(event) {
@@ -21,19 +34,38 @@ export class IngredientsBox extends React.Component {
 		let newIngr = this.state.live;
 		if(newIngr != "") {
 			let ingredients = this.state.ingredients;
-			ingredients.push(<span className="tag is-light margin" 
-									key={ingredients.length}>
-									{newIngr}
-							 </span>);
-			this.setState({
-						live: "",
-						ingredients: ingredients
-					});
-
 			// Test for max number of ingredients
 			if(ingredients.length > 9) {
-
+				this.setState({
+								maxIngMsg: "seems like enough ingredients!",
+								maxIngClass: "is-danger",
+								disabled: true,
+								live: ""
+							});
 			}
+			else {
+				ingredients.push(<span className="tag is-light margin" 
+										key={ingredients.length}>
+										{newIngr}
+								 </span>);
+				this.setState({
+							live: "",
+							ingredients: ingredients,
+							maxIngMsg: "",
+							maxIngClass: "",
+							disabled: false
+						});
+			}
+
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(!this.props.submit && nextProps.submit) {
+			this.props.submitIngr(this.state.ingredients)
+		}
+		if( !nextProps.active ) {
+			this.reset()
 		}
 	}
 
@@ -46,10 +78,11 @@ export class IngredientsBox extends React.Component {
 					<hr/>
 					<div className="field has-addons">
 						<p className="control">
-							<input  onChange={this.handleChange} 
-									value={this.state.live}
+							<input  value={this.state.live}
+									onChange={this.handleChange} 
+									disabled={this.state.disabled}
 									placeholder="Add an ingredient" 
-									className="input"/>
+									className={"input "+ this.state.maxIngClass}/>
 						</p>
 						<p className="control">
 							<button onClick={this.addIngredient} className="button is-primary">
@@ -58,7 +91,7 @@ export class IngredientsBox extends React.Component {
 						</p>
 					</div>
 					<p className="help is-danger">
-						{this.state.maxIngredients}
+						{this.state.maxIngMsg}
 					</p>
 				</form>
 		)
