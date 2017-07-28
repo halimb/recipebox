@@ -30,7 +30,9 @@ export class IngredientsBox extends React.Component {
 	}
 
 	addIngredient(e) {
-		e.preventDefault();
+		if(e) {
+			e.preventDefault();
+		}
 		let newIngr = this.state.live;
 		if(newIngr != "") {
 			let ingredients = this.state.ingredients;
@@ -38,12 +40,16 @@ export class IngredientsBox extends React.Component {
 			if(ingredients.length > 9) {
 				this.setState({
 								maxIngMsg: "seems like enough ingredients!",
-								maxIngClass: "is-danger",
+								maxIngClass: " is-danger",
 								disabled: true,
 								live: ""
 							});
 			}
 			else {
+				newIngr = (<span className="tag is-light margin" 
+								key={ingredients.length}>
+								{newIngr}
+							</span>)
 				ingredients.push(<span className="tag is-light margin" 
 										key={ingredients.length}>
 										{newIngr}
@@ -56,14 +62,20 @@ export class IngredientsBox extends React.Component {
 							disabled: false
 						});
 			}
+			this.props.submitIngr(ingredients);
+		}
+	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if(this.props.submit) {
+			this.addIngredient()
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(!this.props.submit && nextProps.submit) {
-			this.props.submitIngr(this.state.ingredients)
-		}
+		// if(this.props.submit) {
+		// 	this.addIngredient()
+		// }
 		if( !nextProps.active ) {
 			this.reset()
 		}
