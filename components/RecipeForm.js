@@ -1,4 +1,5 @@
 import React from "react"
+import shortid from "shortid"
 import Tag from "./Tag"
 
 export class RecipeForm extends React.Component {
@@ -52,7 +53,13 @@ export class RecipeForm extends React.Component {
 	}
 
 	closeTag(key) {
-		console.log("tag " + key + "closed!")
+		let ingr = this.state.ingredients
+		// console.log("before:")
+		// console.log(ingredients[0].key)
+		ingr = ingr.filter((el) => { return el.key != key })
+		// console.log("after:")
+		// console.log(ingredients)
+		this.setState({ingredients: ingr})
 	}
 
 	addIngredient(e) {
@@ -70,11 +77,11 @@ export class RecipeForm extends React.Component {
 							})
 			}
 			else {
-				let len = ingredients.length;
+				let key = shortid.generate();
 				ingredients.push(
 					<Tag content={ newIngr } 
-						key={ len }
-						onClose={ () => { this.closeTag(len) } }
+						key={ key }
+						onClose={ () => { this.closeTag(key) } }
 					/>
 				);
 				this.setState({
@@ -160,7 +167,8 @@ export class RecipeForm extends React.Component {
 					<div className={ this.state.ingClass }>
 						<form onSubmit={this.addIngredient} className="field box">
 							<h1>Ingredients</h1>
-							<br/>
+							{this.state.ingredients.length ? 
+								<br/> : ""}
 								{this.state.ingredients}
 							<hr/>
 							<div className="field has-addons">
