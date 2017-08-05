@@ -21,21 +21,16 @@ export class MainContainer extends React.Component {
 					})
 		recipes.push(<RecipeBtn key={ key }
 							 name={ recipe.name }
-							 ingr={ ingredients }/>
-							 )
+							 ingr={ ingredients }/>)
 
 		this.setState({recipes: recipes})
 	}
 
 	render() {
 		return (
-				<div className="tile is-ancestor">
-					<div className="tile is-parent is-5">
-						<div  className="tile is-child">
-							<RecipeForm addRecipe={this.addRecipe}/>
-						</div>
-					</div>
-					<div className="tile is-parent is-7">
+				<div className="main">
+					<RecipeForm addRecipe={this.addRecipe}/>
+					<div className="flex-child">
 						{this.state.recipes}
 					</div>
 				</div>

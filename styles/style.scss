@@ -14,36 +14,47 @@ html {
 	margin: $a * .3;
 }
 
-// .container {
-// 	height: 100%; 
-// 	width: 100%;
-// }
+.btn:hover {
+	border-color: $green;
+}
 
 .main {
 	position: absolute;
-	// top: 50%;
-	// transform: translateY(-50%);
-	height: 100%;
-	width: auto;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 80%;
+	width: 80%;
 	right: 0; left: 0;
 	margin: auto;
+	display: flex;
+	flex-direction: row;
 }
 
 .margin {
 	margin: $a * .2;
 }
 
-.max-h {
-	max-height: 90vh !important;
-}
-
 .ingBox {
 	border: 1px solid $red;
+	height: 100%;
 	border-radius: 2px;
 }
 
 .padding {
 	padding: $a*.2 0;
+}
+
+.flex-child {
+	@extend .box;
+	margin: 0 0;
+	min-width: 50%;
+}
+
+.flex-form {
+	display: flex;
+	overflow: auto;
+	flex-direction: column;
+	height: 100%;
 }
 
 .auto-width {

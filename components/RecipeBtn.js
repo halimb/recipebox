@@ -12,7 +12,7 @@ export default class RecipeBtn extends React.Component {
 		let key = shortid.generate();
 		return (
 				<div key={ key }
-					className="button is-large"
+					className="button is-large btn"
 					onClick={ () => this.setState({ pop: !this.state.pop }) }>
 					<h1>{ this.props.name }</h1>
 					<RecipePopup visible={ this.state.pop }/>

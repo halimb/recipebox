@@ -2,12 +2,12 @@ import React from "react"
 
 const Tag = props => {
 	return (
-		<span 	className="tag is-light is-medium margin">
-				{props.content}
+		<div 	className="tag is-light is-medium margin">
+				<p className="break">{props.content}</p>
 				<button className="delete is-small"
 						onClick={props.onClose}
 						type="button"/>
-		 </span>
+		 </div>
 	)
 }
 

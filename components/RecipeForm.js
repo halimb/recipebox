@@ -16,7 +16,8 @@ export class RecipeForm extends React.Component {
 						maxIngClass: "",
 						ingredients: [],
 						submit: false,
-						disabled: false
+						disabled: false,
+						childrenLimit: 12
 					}
 
 		this.reset = this.reset.bind(this)
@@ -53,22 +54,44 @@ export class RecipeForm extends React.Component {
 	}
 
 	closeTag(key) {
-		let ingr = this.state.ingredients
+		let ingr = this.state.ingredients;
+		let limit = this.state.childrenLimit;
 		// console.log("before:")
 		// console.log(ingredients[0].key)
 		ingr = ingr.filter((el) => { return el.key != key })
 		// console.log("after:")
 		// console.log(ingredients)
-		this.setState({ingredients: ingr})
+		if(this.state.ingredients.length <= 12) {
+			this.setState({
+							ingr: "",
+							ingredients: ingr,
+							maxIngMsg: "",
+							maxIngClass: "",
+							disabled: false
+						})
+		} 
+		else {
+			this.setState({ingredients: ingr})
+		}
 	}
 
 	addIngredient(e) {
 		if(e) { e.preventDefault() }
-		let newIngr = this.state.ingr
+		let newIngr = this.state.ingr;
+		let limit = this.state.childrenLimit;
 		if(newIngr != "") {
 			let ingredients = this.state.ingredients
 			// Test for max number of ingredients
-			if(ingredients.length > 12) {
+			if( ingredients.length <= limit ){
+				let key = shortid.generate();
+				ingredients.push(
+					<Tag content={ newIngr } 
+						key={ key }
+						onClose={ () => { this.closeTag(key) } }
+					/>
+				);
+			}
+			if(ingredients.length == limit) {
 				this.setState({
 								maxIngMsg: "seems like enough ingredients!",
 								maxIngClass: " is-danger",
@@ -77,20 +100,13 @@ export class RecipeForm extends React.Component {
 							})
 			}
 			else {
-				let key = shortid.generate();
-				ingredients.push(
-					<Tag content={ newIngr } 
-						key={ key }
-						onClose={ () => { this.closeTag(key) } }
-					/>
-				);
 				this.setState({
-							ingr: "",
-							ingredients: ingredients,
-							maxIngMsg: "",
-							maxIngClass: "",
-							disabled: false
-						})
+						ingr: "",
+						ingredients: ingredients,
+						maxIngMsg: "",
+						maxIngClass: "",
+						disabled: false
+					})
 			}
 		}
 	}
@@ -148,7 +164,7 @@ export class RecipeForm extends React.Component {
 
 	render() {
 		return (
-				<div onFocus={ this.activate } className="box fit">
+				<div onFocus={ this.activate } className="flex-form flex-child">
 					<h1>Add a recipe</h1>
 					<br/>
 					<div className="field">
