@@ -1,5 +1,5 @@
 import React from "react"
-import Recipe from "./Recipe"
+import RecipeBtn from "./RecipeBtn"
 import shortid from "shortid"
 import { RecipeForm } from "./RecipeForm"
 
@@ -19,9 +19,10 @@ export class MainContainer extends React.Component {
 									{el.props.content}
 								</li>)
 					})
-		recipes.push(<Recipe key={ key }
+		recipes.push(<RecipeBtn key={ key }
 							 name={ recipe.name }
-							 ingr={ ingredients }/>)
+							 ingr={ ingredients }/>
+							 )
 
 		this.setState({recipes: recipes})
 	}
@@ -29,13 +30,13 @@ export class MainContainer extends React.Component {
 	render() {
 		return (
 				<div className="tile is-ancestor">
-					<div className="tile is-parent is-7">
-						{this.state.recipes}
-					</div>
 					<div className="tile is-parent is-5">
 						<div  className="tile is-child">
 							<RecipeForm addRecipe={this.addRecipe}/>
 						</div>
+					</div>
+					<div className="tile is-parent is-7">
+						{this.state.recipes}
 					</div>
 				</div>
 			)
