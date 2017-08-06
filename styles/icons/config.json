@@ -1,0 +1,40 @@
+{
+  "name": "rc",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "30b79160618d99ce798e4bd11cafe3fe",
+      "css": "recipe-name",
+      "code": 61685,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "51727ca007aa35ceabcaffc28934faee",
+      "css": "ingredients",
+      "code": 59396,
+      "src": "entypo"
+    },
+    {
+      "uid": "2aeb4987b469d22fcb8b471b6d2cdfff",
+      "css": "edit",
+      "code": 59401,
+      "src": "linecons"
+    },
+    {
+      "uid": "2cc73cc335f054682c04fe63439c4dcb",
+      "css": "delete",
+      "code": 59402,
+      "src": "linecons"
+    },
+    {
+      "uid": "b08f8c33777cd6b512d9576fc6e7f405",
+      "css": "recipe",
+      "code": 59403,
+      "src": "linecons"
+    }
+  ]
+}

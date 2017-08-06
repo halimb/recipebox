@@ -15,7 +15,9 @@ export default class RecipeBtn extends React.Component {
 					className="button is-large btn"
 					onClick={ () => this.setState({ pop: !this.state.pop }) }>
 					<h1>{ this.props.name }</h1>
-					<RecipePopup visible={ this.state.pop }/>
+					<RecipePopup visible={ this.state.pop }
+								 name={ this.props.name }
+								 ingr={ this.props.ingr }/>
 				</div>
 		)
 	}

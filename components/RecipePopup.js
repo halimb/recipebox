@@ -3,7 +3,10 @@ import React from "react";
 export default class RecipePopup extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { visible: false }
+		this.state = { 
+						visible: false,
+
+					 }
 	}
 
 	componentWillReceiveProps(newProps) {
@@ -16,8 +19,16 @@ export default class RecipePopup extends React.Component {
 				<div className="modal-card  box auto-width">
 				<button className="modal-close close"></button>
 					<div className="modal-card-body">
-						bla
+						<h1>{ this.props.name }</h1>
+						<hr/>
+						<ul className="ul">
+						 { this.props.ingr } 
+						</ul>
 					</div>
+					<span style={{ float: "right" }}>
+						<i className="icon-edit"></i>
+						<i className="icon-delete"></i>
+					</span>
 				</div>
 			</div>) :
 			<div></div>;

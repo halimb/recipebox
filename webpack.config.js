@@ -25,10 +25,15 @@ module.exports = {
 			},
 
 			{
-				test: /\.(png|ttf)$/, 
+				test: /\.(png|svg)$/, 
 				exclude: /node_modules/,
 				loader: "url-loader"
-			}
+			},
+			
+			{
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader?name=public/fonts/[name].[ext]'
+            }
 		]
 	}
 }
