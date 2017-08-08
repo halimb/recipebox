@@ -6,7 +6,7 @@ import "./styles/style.scss";
 class App extends React.Component {
 	render() {
 		return (
-				<div className="main box">
+				<div className="main">
 					<MainContainer/>
 				</div>
 			)

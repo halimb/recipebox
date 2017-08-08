@@ -118,7 +118,7 @@ export class RecipeForm extends React.Component {
 						name,
 						ingr 
 					  }
-		this.props.addRecipe(recipe)
+		this.props.submitRecipe(recipe)
 		this.reset()
 	}
 

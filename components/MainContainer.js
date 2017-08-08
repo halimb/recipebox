@@ -29,7 +29,7 @@ export class MainContainer extends React.Component {
 	render() {
 		return (
 				<div className="main">
-					<RecipeForm addRecipe={this.addRecipe}/>
+					<RecipeForm submitRecipe={this.addRecipe}/>
 					<div className="flex-child">
 						{this.state.recipes}
 					</div>

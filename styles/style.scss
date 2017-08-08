@@ -6,7 +6,7 @@
 @import "./styles/icons/css/rc";
 
 $a: 20px;
-$bg: #eee;
+$bg: #fff;
 
 html {
 	background-color: $bg;
@@ -47,7 +47,8 @@ html {
 
 .flex-child {
 	@extend .box;
-	margin: 0 0;
+	margin: 0 $a * 1.25;
+	margin-left: -$a * .5;
 	min-width: 50%;
 }
 
