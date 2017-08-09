@@ -1,7 +1,8 @@
 import React from "react";
 import { RecipeForm } from "./RecipeForm";
+import { Modal } from "./Modal";
 
-export default class RecipePopup extends React.Component {
+export class RecipePopup extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
@@ -16,20 +17,14 @@ export default class RecipePopup extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		this.setState({ visible: newProps.pop });
+		this.setState({ visible: newProps.visible[this.props.id] });
 	}
 
 	render() {
-		let modal = this.state.edit ?
+		let content = this.state.edit ?
 			(<RecipeForm submitRecipe={ this.editRecipe } />) 
 			:
 			(<div>
-				<button onClick={ 
-							() => {
-								this.setState({ visible: false })
-							} 
-						}
-						className="modal-close close"></button>
 				<div className="modal-card-body">
 					<h1>{ this.props.name }</h1>
 					<hr/>
@@ -44,13 +39,10 @@ export default class RecipePopup extends React.Component {
 				</span>
 			</div>);
 
-		let content = this.state.visible ?
-			(<div className="modal is-active">
-				<div className="modal-card  box auto-width">
-					{ modal }
-				</div>	
-			</div>) :
+		let res = this.props.visible ?
+			(<Modal onClose={ this.props.onClose } 
+					content={ content } />) :
 			(<div></div>);
-		return content;
+		return res;
 	}
 }

@@ -42,7 +42,10 @@ export class RecipeForm extends React.Component {
 						maxIngMsg: "",
 						maxIngClass: "",
 						disabled: false
-					})
+					});
+		if(this.props.onClose) {
+			this.props.onClose();
+		}
 	}
 
 	onNameChange(changeEvent) {
@@ -56,11 +59,7 @@ export class RecipeForm extends React.Component {
 	closeTag(key) {
 		let ingr = this.state.ingredients;
 		let limit = this.state.childrenLimit;
-		// console.log("before:")
-		// console.log(ingredients[0].key)
 		ingr = ingr.filter((el) => { return el.key != key })
-		// console.log("after:")
-		// console.log(ingredients)
 		if(this.state.ingredients.length <= 12) {
 			this.setState({
 							ingr: "",
@@ -112,9 +111,11 @@ export class RecipeForm extends React.Component {
 	}
 
 	submitRecipe() {
-		let name = this.state.name
-		let ingr = this.state.ingredients
+		let key = shortid.generate();
+		let name = this.state.name;
+		let ingr = this.state.ingredients;
 		let recipe = {
+						key,
 						name,
 						ingr 
 					  }
@@ -182,7 +183,7 @@ export class RecipeForm extends React.Component {
 					</div>
 					<br/>
 					<div className={ this.state.ingClass } >
-						<form onSubmit={this.addIngredient} className="field box">
+						<form onSubmit={this.addIngredient} className="field ing">
 							<h1>Ingredients</h1>
 							{this.state.ingredients.length ? 
 								<br/> : ""}

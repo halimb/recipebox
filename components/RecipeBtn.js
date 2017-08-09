@@ -1,6 +1,5 @@
 import React from "react";
 import shortid from "shortid";
-import RecipePopup from "./RecipePopup";
 
 export default class RecipeBtn extends React.Component {
 	constructor(props) {
@@ -11,22 +10,17 @@ export default class RecipeBtn extends React.Component {
 	render() {
 		let key = shortid.generate();
 		return (
-				<div key={ key }
-					className="button is-large btn"
-					onClick={ () => this.setState({ pop: true }) }>
+				<div className="button is-large btn"
+					 onClick={ () => this.props.pop(this.props.id) }>
 					<h1>{ this.props.name }</h1>
-					<RecipePopup visible={ this.state.pop }
-								 name={ this.props.name }
-								 ingr={ this.props.ingr }/>
 				</div>
 		)
 	}
 }
 
+// try and keep the conponent tree shallow, 
+// doing so by tranfering the RecipePopup paternity 
+// to MainContainer and popping it using a pop() prop
+// in RecipeBtn onClick
 
-/*
-<hr/>
-<ul>
-	{ props.ingr }	
-</ul>
-*/
+
