@@ -40,13 +40,13 @@ export class MainContainer extends React.Component {
 	}
 
 	inflate() {
+		let res = {};
 		let recipeBtns = [];
 		let recipePopups = [];
 		let recipes = this.state.recipes;
 		for(let i = 0; i < recipes.length; i++) {
 			let recipe = recipes[i];
 			let key = recipe.key;
-			console.log(recipe)
 			let ingredients = recipe.ingr.map(
 				(el) => {
 							return 	(<li key={ el.key }>
@@ -58,7 +58,7 @@ export class MainContainer extends React.Component {
 				<RecipeBtn 
 					 key={ key }
 					 id={ key }
-					 pop={ this.setRecipeVis }
+					 pop={ () => this.setRecipeVis(key) }
 					 name={ recipe.name }/>
 				);
 
@@ -78,30 +78,34 @@ export class MainContainer extends React.Component {
 				);
 
 		}
-		return (<div>{ recipeBtns }{ recipePopups }</div>);
+		res.btns = recipeBtns;
+		res.popups = recipePopups;
+		return res;
 	}
 
 	render() {
-		let recipes = this.inflate();
-		let recipeForm = (<RecipeForm 
-						onClose={ 
-							() => this.setState({ formVis: false }) 
-						}
-						submitRecipe={this.addRecipe}/>)
+		let inflated = this.inflate();
+		let btns = inflated.btns;
+		let popups = inflated.popups;
 		return (
 				<div>
 					<div className="main box">
 						<div className="banner">
 							Recipes
 						</div>
-						{ recipes }
+						{ btns }
 						<div className="button is-primary bottom add-btn"
-							 onClick={ () => { this.setState({ formVis: true }) } }>
+							 onClick={() => { this.setState({ formVis: true }) } }>
 							+ Add Recipe
 						</div>
 					</div>
-					<Modal visible={ this.state.formVis } 
-						   content={ recipeForm }/>
+					{ popups }
+					<RecipeForm 
+						onClose={ 
+							() => this.setState({ formVis: false }) 
+						}
+						visible={ this.state.formVis }
+						submitRecipe={ this.addRecipe }/>
 				</div>
 			)
 	}

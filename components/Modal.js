@@ -3,8 +3,15 @@ import React from "react";
 export class Modal extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { visible: "is-active" };
+		this.state = { visible: "" };
 		this.close = this.close.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick(e) {
+		if(e.target.id == "background") {
+			this.close();
+		}
 	}
 
 	close() {
@@ -22,8 +29,10 @@ export class Modal extends React.Component {
 
 	render() {
 		return (
-			<div className={ "modal " + this.state.visible }>
-				<div className="modal-card popup box">
+			<div id="background" 
+				 onClick={ this.handleClick } 
+				 className={ "modal modal-bg " + this.state.visible }>
+				<div  className="modal-card popup box">
 					<button onClick={ this.close }
 						className="modal-close close"></button>
 					<div className="modal-card-body">

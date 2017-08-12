@@ -6,7 +6,7 @@ export class RecipePopup extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
-						visible: false,
+						// visible: false,
 						edit: false
 					 }
 		this.editRecipe = this.editRecipe.bind(this);
@@ -16,9 +16,9 @@ export class RecipePopup extends React.Component {
 		return;
 	}
 
-	componentWillReceiveProps(newProps) {
-		this.setState({ visible: newProps.visible[this.props.id] });
-	}
+	// componentWillReceiveProps(newProps) {
+	// 	this.setState({ visible: newProps.visible });
+	// }
 
 	render() {
 		let content = this.state.edit ?
@@ -39,10 +39,9 @@ export class RecipePopup extends React.Component {
 				</span>
 			</div>);
 
-		let res = this.props.visible ?
-			(<Modal onClose={ this.props.onClose } 
-					content={ content } />) :
-			(<div></div>);
-		return res;
+			return (<Modal 
+						visible={ this.props.visible }
+						onClose={ this.props.onClose } 
+						content={ content } />);
 	}
 }

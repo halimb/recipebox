@@ -1,6 +1,7 @@
-import React from "react"
-import shortid from "shortid"
-import Tag from "./Tag"
+import React from "react";
+import shortid from "shortid";
+import Tag from "./Tag";
+import { Modal } from "./Modal";
 
 export class RecipeForm extends React.Component {
 	constructor(props) {
@@ -164,7 +165,7 @@ export class RecipeForm extends React.Component {
 	}
 
 	render() {
-		return (
+		let recipeForm = (
 				<div onFocus={ this.activate } className="flex-form flex-child">
 					<h1>Add a recipe</h1>
 					
@@ -226,6 +227,13 @@ export class RecipeForm extends React.Component {
 						</div>
 					</div>
 				</div>
+			)
+
+		
+		return (
+				<Modal content={ recipeForm }
+					   visible={ this.props.visible } 
+					   onClose={ this.reset }/> 
 			)
 	}
 }
