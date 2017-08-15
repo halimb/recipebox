@@ -26,14 +26,16 @@ export class RecipePopup extends React.Component {
 			:
 			(<div>
 				<div className="modal-card-body">
-					<h1>{ this.props.name }</h1>
+					<h1 className="title center">
+						{ this.props.name }
+					</h1>
 					<hr/>
 					<ul className="ul">
 					 { this.props.ingr } 
 					</ul>
 				</div>
 				<span style={{ float: "right" }}>
-					<i onClick={ () => { this.setState({edit: true}) }}
+					<i onClick={ this.props.onEdit }
 					   className="icon-edit"></i>
 					<i className="icon-delete"></i>
 				</span>

@@ -5,7 +5,7 @@ import { Modal } from "./Modal";
 
 export class RecipeForm extends React.Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 						name: "",
 						ingr: "",
@@ -42,7 +42,8 @@ export class RecipeForm extends React.Component {
 						submit: false,
 						maxIngMsg: "",
 						maxIngClass: "",
-						disabled: false
+						disabled: false,
+						editedRecipe: false
 					});
 		if(this.props.onClose) {
 			this.props.onClose();
@@ -112,7 +113,8 @@ export class RecipeForm extends React.Component {
 	}
 
 	submitRecipe() {
-		let key = shortid.generate();
+		let edited = this.state.editedRecipe; 
+		let key = edited ? edited.key : shortid.generate();
 		let name = this.state.name;
 		let ingr = this.state.ingredients;
 		let recipe = {
@@ -120,8 +122,8 @@ export class RecipeForm extends React.Component {
 						name,
 						ingr 
 					  }
-		this.props.submitRecipe(recipe)
-		this.reset()
+		this.props.submitRecipe(recipe);		
+		this.reset();
 	}
 
 	submit() {
@@ -164,10 +166,24 @@ export class RecipeForm extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.prefill != false) {
+			var edit = nextProps.prefill;	
+			this.setState({
+						name: edit.name,
+						ingredients: edit.ingr,
+						editedRecipe: edit
+					})
+		}
+	}
+
 	render() {
+		let defaultName = this.props.prefill ?
+			this.props.prefill.name : "";
+
 		let recipeForm = (
 				<div onFocus={ this.activate } className="flex-form flex-child">
-					<h1>Add a recipe</h1>
+					<h1>{ this.props.title }</h1>
 					
 					<br/>
 					<div className="field">

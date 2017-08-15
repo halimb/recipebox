@@ -10,11 +10,14 @@ export class MainContainer extends React.Component {
 		this.state = {
 						ids: {},
 						recipes: [],
-						formVis: false
+						formVis: false,
+						edit: false,
+						current: false
 					}
 		this.inflate = this.inflate.bind(this);
 		this.addRecipe = this.addRecipe.bind(this);
 		this.setFormVis = this.setFormVis.bind(this);
+		this.editRecipe = this.editRecipe.bind(this);
 		this.setRecipeVis = this.setRecipeVis.bind(this);
 	}
 
@@ -23,8 +26,23 @@ export class MainContainer extends React.Component {
 	}
 
 	addRecipe(recipe) {
+		let exists = false;
 		let recipes = this.state.recipes;
-		recipes.push(recipe);
+		for(var i = 0; i < recipes.length; i++) {
+			if(recipe.key == recipes[i].key) {
+				console.log("before: ")
+				console.log(recipes)
+				console.log(recipe)
+				console.log("found!");
+				recipes[i] = recipe;
+				console.log("after: ")
+				console.log(recipes)
+				exists = true;
+			}
+		}
+		if(!exists) {
+			recipes.push(recipe);
+		}
 		let ids = this.state.ids;
 		ids[recipe.key] = false;
 		this.setState({ 
@@ -37,6 +55,19 @@ export class MainContainer extends React.Component {
 		let ids = this.state.ids;
 		ids[id] = show;
 		this.setState({ ids: ids });
+	}
+
+	editRecipe(key) {
+		var recipes = this.state.recipes;
+		var res = false;
+		for(let i = 0; i < recipes.length; i++) {
+			if(recipes[i].key == key) {
+				res = recipes[i];
+			}
+		}
+		this.setState({ edit: true,
+						current: res,
+						formVis: true }); 
 	}
 
 	inflate() {
@@ -73,6 +104,11 @@ export class MainContainer extends React.Component {
 					 }
 					 name={ recipe.name }
 					 ingr={ ingredients }
+					 onEdit={ () => {
+					 			this.setRecipeVis(key, false); 
+					 			this.editRecipe(key);
+					 			}
+							}
 					 visible={ this.state.ids[key] }
 					/>
 				);
@@ -101,10 +137,16 @@ export class MainContainer extends React.Component {
 					</div>
 					{ popups }
 					<RecipeForm 
+						title={ this.state.edit ? 
+							"Edit" : "Add a recipe" }
 						onClose={ 
-							() => this.setState({ formVis: false }) 
+							() =>
+							 this.setState({ formVis: false,
+									 		 current: false,
+									 		 edit: false }) 
 						}
 						visible={ this.state.formVis }
+						prefill={ this.state.current }
 						submitRecipe={ this.addRecipe }/>
 				</div>
 			)
