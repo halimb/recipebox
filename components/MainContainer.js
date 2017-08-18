@@ -70,6 +70,21 @@ export class MainContainer extends React.Component {
 						formVis: true }); 
 	}
 
+	deleteRecipe(key) {
+		var recipes = this.state.recipes;
+		var res = [];
+		for(let i = 0; i < recipes.length; i++) {
+			if(recipes[i].key == key) {
+				continue;
+			}
+			else {
+				res.push(recipes[i]);
+			}
+		}
+
+		this.setState({ recipes: res });
+	}
+
 	inflate() {
 		let res = {};
 		let recipeBtns = [];
@@ -109,6 +124,7 @@ export class MainContainer extends React.Component {
 					 			this.editRecipe(key);
 					 			}
 							}
+					 onDelete={ () => this.deleteRecipe(key) }
 					 visible={ this.state.ids[key] }
 					/>
 				);
