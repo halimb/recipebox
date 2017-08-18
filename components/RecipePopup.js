@@ -16,10 +16,6 @@ export class RecipePopup extends React.Component {
 		return;
 	}
 
-	// componentWillReceiveProps(newProps) {
-	// 	this.setState({ visible: newProps.visible });
-	// }
-
 	render() {
 		let content = this.state.edit ?
 			(<RecipeForm submitRecipe={ this.editRecipe } />) 
@@ -35,10 +31,10 @@ export class RecipePopup extends React.Component {
 					</ul>
 				</div>
 				<span style={{ float: "right" }}>
-					<i  title="Edit the recipe"
+					<i  title="edit"
 						onClick={ this.props.onEdit }
 						className="icon-edit"></i>
-					<i  title="Delete the recipe"
+					<i  title="delete"
 						onClick={ this.props.onDelete }
 						className="icon-delete"></i>
 				</span>

@@ -71,7 +71,6 @@ export class RecipeForm extends React.Component {
 		);
 		ingr = ingrTags.map(
 			(tag) => {
-				console.log(tag.props.content);
 				return tag.props.content;
 			}
 		)
@@ -86,9 +85,6 @@ export class RecipeForm extends React.Component {
 							disabled: false
 						})
 		} 
-		// else {
-		// 	this.setState({ingredients: ingr})
-		// }
 	}
 
 	inflateTags(ingredients) {

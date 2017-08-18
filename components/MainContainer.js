@@ -1,16 +1,22 @@
 import React from "react";
 import RecipeBtn from "./RecipeBtn";
 import { RecipeForm } from "./RecipeForm";
-import {RecipePopup} from "./RecipePopup";
+import { RecipePopup } from "./RecipePopup";
+import defaultRecipes from "../json/defaultRecipes.json"
 import shortid from "shortid";
 import { Modal } from "./Modal";
 
 export class MainContainer extends React.Component {
 	constructor(props) {
 		super(props);
+		let recipes = 
+			JSON.parse(
+				window.localStorage.getItem("recipes")
+				) 
+			|| defaultRecipes;
 		this.state = {
 						ids: {},
-						recipes: [],
+						recipes: recipes,
 						formVis: false,
 						edit: false,
 						current: false
@@ -80,6 +86,12 @@ export class MainContainer extends React.Component {
 		this.setState({ recipes: res });
 	}
 
+	componentDidUpdate() {
+		window.localStorage.clear();
+		let recipes = JSON.stringify(this.state.recipes)
+		window.localStorage.setItem("recipes", recipes);
+	}
+
 	inflate() {
 		let res = {};
 		let recipeBtns = [];
@@ -143,7 +155,7 @@ export class MainContainer extends React.Component {
 						</div>
 						{ btns }
 						<div className="button is-primary bottom add-btn"
-							 onClick={() => { this.setState({ formVis: true }) } }>
+							 onClick={ () => { this.setState({ formVis: true }) } }>
 							+ Add Recipe
 						</div>
 					</div>

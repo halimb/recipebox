@@ -17,10 +17,3 @@ export default class RecipeBtn extends React.Component {
 		)
 	}
 }
-
-// try and keep the conponent tree shallow, 
-// doing so by tranfering the RecipePopup paternity 
-// to MainContainer and popping it using a pop() prop
-// in RecipeBtn onClick
-
-
