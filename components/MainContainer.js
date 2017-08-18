@@ -2,6 +2,7 @@ import React from "react";
 import RecipeBtn from "./RecipeBtn";
 import { RecipeForm } from "./RecipeForm";
 import {RecipePopup} from "./RecipePopup";
+import shortid from "shortid";
 import { Modal } from "./Modal";
 
 export class MainContainer extends React.Component {
@@ -30,13 +31,7 @@ export class MainContainer extends React.Component {
 		let recipes = this.state.recipes;
 		for(var i = 0; i < recipes.length; i++) {
 			if(recipe.key == recipes[i].key) {
-				console.log("before: ")
-				console.log(recipes)
-				console.log(recipe)
-				console.log("found!");
 				recipes[i] = recipe;
-				console.log("after: ")
-				console.log(recipes)
 				exists = true;
 			}
 		}
@@ -95,8 +90,9 @@ export class MainContainer extends React.Component {
 			let key = recipe.key;
 			let ingredients = recipe.ingr.map(
 				(el) => {
-							return 	(<li key={ el.key }>
-										{el.props.content}
+							let id = shortid.generate();
+							return 	(<li key={ id }>
+										{ el }
 									</li>)
 						})
 

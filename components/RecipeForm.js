@@ -15,6 +15,7 @@ export class RecipeForm extends React.Component {
 						ingClass: "",
 						maxIngMsg: "",
 						maxIngClass: "",
+						ingrTags: [],
 						ingredients: [],
 						submit: false,
 						disabled: false,
@@ -38,12 +39,13 @@ export class RecipeForm extends React.Component {
 						nameClass: "",
 						ingMsg: "",
 						ingClass: "",
+						ingrTags: [],
 						ingredients: [],
 						submit: false,
 						maxIngMsg: "",
 						maxIngClass: "",
 						disabled: false,
-						editedRecipe: false
+						prefilledRecipe: false
 					});
 		if(this.props.onClose) {
 			this.props.onClose();
@@ -60,20 +62,51 @@ export class RecipeForm extends React.Component {
 
 	closeTag(key) {
 		let ingr = this.state.ingredients;
+		let ingrTags = this.state.ingrTags;
 		let limit = this.state.childrenLimit;
-		ingr = ingr.filter((el) => { return el.key != key })
+		ingrTags = ingrTags.filter(
+			(el) => { 
+				return el.key != key 
+			}
+		);
+		ingr = ingrTags.map(
+			(tag) => {
+				console.log(tag.props.content);
+				return tag.props.content;
+			}
+		)
+
 		if(this.state.ingredients.length <= 12) {
 			this.setState({
 							ingr: "",
 							ingredients: ingr,
+							ingrTags: ingrTags,
 							maxIngMsg: "",
 							maxIngClass: "",
 							disabled: false
 						})
 		} 
-		else {
-			this.setState({ingredients: ingr})
+		// else {
+		// 	this.setState({ingredients: ingr})
+		// }
+	}
+
+	inflateTags(ingredients) {
+		let res = []
+		for(let i = 0; i < ingredients.length; i++) {
+			let key = shortid.generate();
+			res.push(
+					<Tag content={ ingredients[i] } 
+						key={ key }
+						onClose={ 
+							() => { 
+								this.closeTag(key) 
+							} 
+						}
+					/>
+				);
 		}
+		return res;
 	}
 
 	addIngredient(e) {
@@ -82,15 +115,23 @@ export class RecipeForm extends React.Component {
 		let limit = this.state.childrenLimit;
 		if(newIngr != "") {
 			let ingredients = this.state.ingredients
+			let ingrTags = this.state.ingrTags;
 			// Test for max number of ingredients
 			if( ingredients.length <= limit ){
+				//add ingredient
+				ingredients.push(newIngr);
+				//add ingredient tag
 				let key = shortid.generate();
-				ingredients.push(
-					<Tag content={ newIngr } 
-						key={ key }
-						onClose={ () => { this.closeTag(key) } }
-					/>
-				);
+				ingrTags.push(
+							<Tag content={ newIngr } 
+								key={ key }
+								onClose={ 
+									() => { 
+										this.closeTag(key) 
+									} 
+								}
+							/>
+						);
 			}
 			if(ingredients.length == limit) {
 				this.setState({
@@ -103,6 +144,7 @@ export class RecipeForm extends React.Component {
 			else {
 				this.setState({
 						ingr: "",
+						ingrTags: ingrTags,
 						ingredients: ingredients,
 						maxIngMsg: "",
 						maxIngClass: "",
@@ -113,7 +155,7 @@ export class RecipeForm extends React.Component {
 	}
 
 	submitRecipe() {
-		let edited = this.state.editedRecipe; 
+		let edited = this.state.prefilledRecipe; 
 		let key = edited ? edited.key : shortid.generate();
 		let name = this.state.name;
 		let ingr = this.state.ingredients;
@@ -168,12 +210,13 @@ export class RecipeForm extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if(nextProps.prefill != false) {
-			var edit = nextProps.prefill;	
+			var prefill = nextProps.prefill;	
 			this.setState({
-						name: edit.name,
-						ingredients: edit.ingr,
-						editedRecipe: edit
-					})
+						name: prefill.name,
+						prefilledRecipe: prefill,
+						ingredients: prefill.ingr,
+						ingrTags: this.inflateTags(prefill.ingr)
+					});
 		}
 	}
 
@@ -204,7 +247,7 @@ export class RecipeForm extends React.Component {
 							<h1>Ingredients</h1>
 							{this.state.ingredients.length ? 
 								<br/> : ""}
-								{this.state.ingredients}
+								{this.state.ingrTags}
 							<hr/>
 							<div className="field has-addons">
 								<p className="control">
