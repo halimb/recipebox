@@ -33,7 +33,9 @@ export class Modal extends React.Component {
 				 onClick={ this.handleClick } 
 				 className={ "modal modal-bg " + this.state.visible }>
 				<div  className="modal-card popup box">
-					<button onClick={ this.close }
+					<button 
+						title="Close"
+						onClick={ this.close }
 						className="modal-close close"></button>
 					<div className="modal-card-body">
 						{ this.props.content }
