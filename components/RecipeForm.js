@@ -222,7 +222,7 @@ export class RecipeForm extends React.Component {
 
 		let recipeForm = (
 				<div onFocus={ this.activate } className="flex-form flex-child">
-					<h1>{ this.props.title }</h1>
+					<h1 className="large">{ this.props.title }</h1>
 					
 					<br/>
 					<div className="field">
@@ -240,7 +240,7 @@ export class RecipeForm extends React.Component {
 					<br/>
 					<div className={ this.state.ingClass } >
 						<form onSubmit={this.addIngredient} className="field ing">
-							<h1>Ingredients</h1>
+							<h1 className="medium">Ingredients</h1>
 							{this.state.ingredients.length ? 
 								<br/> : ""}
 								{this.state.ingrTags}
@@ -270,13 +270,13 @@ export class RecipeForm extends React.Component {
 					<br/>
 					<div className="field is-grouped">
 						<div className="control">
-							<button className="button is-primary"
+							<button className="button is-medium"
 									onClick={this.submit}>
 								Add
 							</button>
 						</div>
 						<div className="control">
-							<button onClick={this.reset} className="button is-outlined">
+							<button onClick={this.reset} className="button is-outlined is-medium">
 								Cancel
 							</button>
 						</div>

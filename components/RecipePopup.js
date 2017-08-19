@@ -33,10 +33,10 @@ export class RecipePopup extends React.Component {
 				<span style={{ float: "right" }}>
 					<i  title="edit"
 						onClick={ this.props.onEdit }
-						className="icon-edit"></i>
+						className="icon-edit pointer"></i>
 					<i  title="delete"
 						onClick={ this.props.onDelete }
-						className="icon-delete"></i>
+						className="icon-delete pointer"></i>
 				</span>
 			</div>);
 

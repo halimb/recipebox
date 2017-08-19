@@ -9,8 +9,12 @@ $a: 20px;
 $bg: #fff;
 
 
-html {
-	background-color: $bg;
+.bg {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	opacity: .5;
+	background-image: url("https://cdn.rawgit.com/halimb/res/3335dd71/pattern.png");
 }
 
 .btn {
@@ -26,7 +30,7 @@ html {
 	top: 50%;
 	transform: translateY(-50%);
 	height: 80%;
-	width: 80%;
+	width: 70%;
 	right: 0; left: 0;
 	margin: auto;
 	// display: flex;
@@ -93,16 +97,9 @@ li::before{
 }
 
 .banner {
-	display: block;
-	vertical-align: middle;
-	text-align: center;
-	padding: $a * .5;
-	margin-bottom: $a;
-	border-radius: 6px;
-	color: white;
-	font-weight: 400;
-	font-size: $a * 2;
-	background-color: $primary;
+	text-align: center;	font-weight: 400;
+	font-size: $a * 1.5;
+	//background-color: $grey-lighter;
 }
 
 .add-btn {
@@ -124,6 +121,20 @@ li::before{
 	text-align: center;
 }
 
-i {
+.pointer {
 	cursor: pointer;	
+}
+
+.large {
+	font-size: 1.5 * $a;
+	text-align: center;
+}
+
+.medium {
+	font-size: $a;
+}
+
+.small {
+	font-size: $a * .8;
+	font-style: italic !important;
 }

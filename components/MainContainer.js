@@ -151,10 +151,12 @@ export class MainContainer extends React.Component {
 				<div>
 					<div className="main box">
 						<div className="banner">
-							Recipes
+							Recipes&nbsp;
+							<i className="icon-recipe"></i>
 						</div>
+						<hr/>
 						{ btns }
-						<div className="button is-primary bottom add-btn"
+						<div className="button is-medium  bottom add-btn"
 							 onClick={ () => { this.setState({ formVis: true }) } }>
 							+ Add Recipe
 						</div>
