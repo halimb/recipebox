@@ -10,7 +10,7 @@ export default class RecipeBtn extends React.Component {
 	render() {
 		let key = shortid.generate();
 		return (
-				<div className="button is-large btn"
+				<div className="button is-medium btn"
 					 onClick={ () => this.props.pop(this.props.id) }>
 					<h1>{ this.props.name }</h1>
 				</div>

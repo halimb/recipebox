@@ -156,7 +156,7 @@ export class MainContainer extends React.Component {
 						</div>
 						<hr/>
 						{ btns }
-						<div className="button is-medium  bottom add-btn"
+						<div className="button is-medium bottom add-btn"
 							 onClick={ () => { this.setState({ formVis: true }) } }>
 							+ Add Recipe
 						</div>

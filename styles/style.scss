@@ -7,6 +7,7 @@
 
 $a: 20px;
 $bg: #fff;
+$myGreen: #ad5;
 
 
 .bg {
@@ -98,13 +99,14 @@ li::before{
 
 .banner {
 	text-align: center;	font-weight: 400;
-	font-size: $a * 1.5;
-	//background-color: $grey-lighter;
+	font-size: $a * 1.75;
+	//background: $myGreen;
 }
 
 .add-btn {
 	font-size: $a * .9;
 	font-weight: 500;
+	background: $myGreen;
 }
 
 .bottom {

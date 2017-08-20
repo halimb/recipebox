@@ -2,7 +2,7 @@ module.exports = {
 	entry: __dirname + "/index.js",
 	output: {
 		filename: "bundle.js",
-		publicPath: "/recipebox/",
+		//publicPath: "/recipebox/",
 		path: __dirname + "/build/"
 	},
 
