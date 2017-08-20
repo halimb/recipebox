@@ -7,7 +7,9 @@
 
 $a: 20px;
 $bg: #fff;
-$myGreen: #ad5;
+$btnGreen: #bd5;
+$recipeGreen: #efb;
+
 
 
 .bg {
@@ -20,10 +22,11 @@ $myGreen: #ad5;
 
 .btn {
 	margin: $a * .3;
+	background: $recipeGreen;
 }
 
 .btn:hover {
-	border-color: $green;
+	border-color: $btnGreen;
 }
 
 .main {
@@ -106,7 +109,7 @@ li::before{
 .add-btn {
 	font-size: $a * .9;
 	font-weight: 500;
-	background: $myGreen;
+	background: $btnGreen;
 }
 
 .bottom {
