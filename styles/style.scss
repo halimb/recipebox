@@ -16,17 +16,12 @@ $recipeGreen: #efb;
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	opacity: .5;
-	background-image: url("../img/pattern.png");
+	background: #eef;
 }
+
 
 .btn {
 	margin: $a * .3;
-	background: $recipeGreen;
-}
-
-.btn:hover {
-	border-color: $btnGreen;
 }
 
 .main {
@@ -34,11 +29,12 @@ $recipeGreen: #efb;
 	top: 50%;
 	transform: translateY(-50%);
 	height: 80%;
-	width: 70%;
+	width: 60%;
 	right: 0; left: 0;
 	margin: auto;
 	border-radius: 1px;
-	box-shadow: $a*.2 $a*.2 $a 0 rgba(0,0,0,.3);
+	box-shadow: 0 0 $a 0 rgba(0,0,0,.2);
+	border-radius: 5px
 	// display: flex;
 	// flex-direction: column;
 }
@@ -143,4 +139,10 @@ li::before{
 .small {
 	font-size: $a * .8;
 	font-style: italic !important;
+}
+
+@media screen and (max-width: 500px) {
+	.main {
+		width: 90%;
+	}
 }
